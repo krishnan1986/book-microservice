@@ -79,7 +79,7 @@ public class BookService {
     public String getAuthorName(String name) {
         Book book = bookRepository.findByTitle(name);
 
-        List<ServiceInstance> instances =discoveryClient.getInstances("author-service");
+        List<ServiceInstance> instances =discoveryClient.getInstances("AUTHOR-SERVICE");
         String serviceUri=instances.get(0).getUri().toString();
       return  restTemplate.getForObject( serviceUri+"/fetch/book/"+book.getAuthorId(),String.class);
     }
