@@ -4,6 +4,7 @@ package com.store.book.service;
 
 import com.store.book.domain.Book;
 import com.store.book.repository.BookRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -15,7 +16,9 @@ import java.util.Optional;
 import java.util.Random;
 
 @Service
+@Slf4j
 public class BookService {
+
 
     private final BookRepository bookRepository;
 
@@ -95,6 +98,7 @@ public class BookService {
 
     public String getServiceURI(){
          List<ServiceInstance> instances =discoveryClient.getInstances("author-service");
+         log.info("service uri instances"+instances.get(0).getUri().toString());
         return instances.get(0).getUri().toString();
 
     }
